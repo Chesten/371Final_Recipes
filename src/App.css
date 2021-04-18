@@ -1,18 +1,19 @@
 .App {
   display: grid;
-  grid-template-columns: 1fr, 3fr;
+  grid-template-columns: 1fr 4fr 1fr;
   grid-template-areas:
-    'header'
-    'sidebar main'
-    'sidebar main';
+    'header header header'
+    'sidebar main main'
+    'sidebar main main'
+    'footer footer footer';
     text-align: left;
 }
-.App> section:nth-child(1){
+.App> #HeaderBanner{
   grid-area: header;
 }
-.App> section:nth-child(2){
+.App> #SideBar{
   grid-area: sidebar;
 }
-.App> section:nth-child(3){
+.App> #MainWindow{
   grid-area: main;
 }

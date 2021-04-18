@@ -17,7 +17,7 @@ function Sidebar(prop){
     }
 
     return(
-        <nav>
+        <nav id="SideBar">
             <p>temp nav</p>
             <form onSubmit ={function(e){
                 e.preventDefault()

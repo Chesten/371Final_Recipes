@@ -1,8 +1,14 @@
 #HeaderBanner{
-    text-align: center;
     background-color: lightskyblue;
+}
+h1,h3{
+    text-align: center;
 }
 #LogIn{
     text-align: right;
     padding: .5em;
+}
+#SignUp{
+    float: right;
+    margin: .82em;
 }
