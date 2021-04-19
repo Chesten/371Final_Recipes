@@ -73,6 +73,18 @@ function App() {
       }
   }
 
+  function Search(){
+
+  }
+
+  function Recipe(title, desc, ingredients, pub){
+    //database creation for a recipe
+      //data is getting back here so just need DB integration
+    console.log("title: " +title)
+    console.log("desc: " +desc)
+    console.log("ing: " +ingredients)
+    console.log("isPublic: " +pub)
+  }
 
   return (
     //this is where we will have the components layed out for our application, similarly to the
@@ -90,7 +102,9 @@ function App() {
               Search = {function(term){
                 console.log(term)
               }}></Sidebar>
-      <MainWindow></MainWindow>
+      <MainWindow Recipe = {function(title, desc, ingredients, pub){
+        Recipe(title, desc, ingredients, pub)
+      }}></MainWindow>
     </div>
   );
 }
