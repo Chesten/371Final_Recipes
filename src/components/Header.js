@@ -21,9 +21,9 @@ function Header(prop){
                 }}>SignUp</button>
                 <form id="LogIn" onSubmit={function(e){
                     e.preventDefault()
-                    prop.LogIn(e.target.UserName.value, e.target.pass.value)
+                    prop.LogIn(e.target.email.value, e.target.pass.value)
                 }}>
-                    <input type="text" name= "UserName" placeholder="User Name"></input>
+                    <input type="text" name= "email" placeholder="email"></input>
                     <input type="password" name="pass"></input>
                     <input type="submit" name="logIn" value="logIn"></input>
                 </form>
