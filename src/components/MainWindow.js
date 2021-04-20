@@ -1,10 +1,10 @@
 import './MainWindow.css';
 import RecipeEntry from './RecipeEntry'
 import Recipe from './Recipe'
+
 function MainWindow(prop){
 
     var list=[]
-    var i=0;
 
     list.push(<RecipeEntry SearchedRecipe={prop.SearchedRecipe}></RecipeEntry>)
 
