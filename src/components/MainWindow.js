@@ -5,8 +5,8 @@ import Recipe from './Recipe'
 function MainWindow(prop){
 
     var list=[]
-
-    list.push(<RecipeEntry SearchedRecipe={prop.SearchedRecipe}></RecipeEntry>)
+    var i=0;
+    list.push(<RecipeEntry key = {i++} SearchedRecipe={prop.SearchedRecipe}></RecipeEntry>)
 
     return(
         <div id="MainWindow">
