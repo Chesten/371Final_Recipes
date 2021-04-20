@@ -13,10 +13,9 @@ function App() {
 
 
 
-
   var temp = [{name:"john", UID:"123"}, {name:"bill", UID:"234"}, {name:"phil", UID:"098", weird:"something new"}]
   const [UserName, setUserName] = useState('')
-
+  const [SearchedRecipe, setRecipe] = useState(Object)
   function Login(email, password){
     
     //this console log will be one "behind", the set UserName is async
@@ -73,17 +72,41 @@ function App() {
       }
   }
 
-  function Search(){
+  function Search(title){
+    var docRef = firebase.firestore().collection("recipes").doc(title)
 
+    docRef.get().then((doc)=>{
+      if(doc.exists){
+        console.log("doc found: " + JSON.stringify(doc.data()))
+        setRecipe(doc.data())
+        
+      }
+      else{
+        console.log("doc not found")
+      }
+    })
   }
 
   function Recipe(title, desc, ingredients, pub){
     //database creation for a recipe
-      //data is getting back here so just need DB integration
-    console.log("title: " +title)
-    console.log("desc: " +desc)
-    console.log("ing: " +ingredients)
-    console.log("isPublic: " +pub)
+
+    //need some checking here for if a title has been entered
+      //otherwise the old recipe will be overwritted with the new, 
+      //so there needs to be some search, then maybe append a number 
+      //for multiple different recipes of the same meal
+    firebase.firestore().collection("recipes").doc(title).set({
+      Title: title,
+      Description: desc, 
+      Ingredients: ingredients, 
+      isPublic: pub, 
+      author: UserName
+    }).then(()=>{
+      console.log(title + " successfully written!");
+    }).catch((error) => {
+      console.error("Error writing document: ", error);
+  });
+
+
   }
 
   return (
@@ -101,10 +124,12 @@ function App() {
      <Sidebar data={temp}
               Search = {function(term){
                 console.log(term)
+                Search(term)
               }}></Sidebar>
-      <MainWindow Recipe = {function(title, desc, ingredients, pub){
-        Recipe(title, desc, ingredients, pub)
-      }}></MainWindow>
+      <MainWindow SearchedRecipe = {SearchedRecipe}
+                  Recipe = {function(title, desc, ingredients, pub){
+                    Recipe(title, desc, ingredients, pub)
+              }}></MainWindow>
     </div>
   );
 }

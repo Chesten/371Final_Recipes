@@ -1,12 +1,16 @@
 
 function RecipeEntry(prop){
 
-    var Name =prop.Name
-
+    var Recipe = JSON.parse(JSON.stringify(prop.SearchedRecipe))
+    console.log(Recipe.Title)
     return(
-        <div id="Recipe">
-            <p>This is a single recipe Entry</p>
-            {Name}            
+        <div id="RecipeEntry">
+
+            <h5>{Recipe.Title}</h5>
+            <p>{Recipe.Description}<br></br>
+                {Recipe.Ingredients}<br></br>
+            </p>    
+ 
         </div>
     )
 }
