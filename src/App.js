@@ -16,6 +16,8 @@ function App() {
   var temp = [{name:"john", UID:"123"}, {name:"bill", UID:"234"}, {name:"phil", UID:"098", weird:"something new"}]
   const [UserName, setUserName] = useState('')
   const [SearchedRecipe, setRecipe] = useState(Object)
+  const [AllRecipe, setAllRecipe] = useState(Array)
+
   function Login(email, password){
     
     //this console log will be one "behind", the set UserName is async
@@ -73,6 +75,7 @@ function App() {
   }
 
   function Search(title){
+    console.log("Search Title: " + title)
     var docRef = firebase.firestore().collection("recipes").doc(title)
 
     docRef.get().then((doc)=>{
@@ -85,6 +88,24 @@ function App() {
         console.log("doc not found")
       }
     })
+  }
+  function LoadAll(){
+      var colRef = firebase.firestore().collection("recipes")
+      
+      colRef.get().then((col)=>{
+        console.log(col)
+        if(!col.empty){
+          var ListOfRecipes = []
+          console.log("found: " + JSON.stringify(col.docs[0].id))
+          for(var i=0; i<col.docs.length; i++){
+            ListOfRecipes.push(col.docs[i].id)
+          }
+          setAllRecipe(ListOfRecipes)
+        }
+        else{
+          console.log("collection not found")
+        }
+      })
   }
 
   function Recipe(title, desc, ingredients, pub){
@@ -129,7 +150,14 @@ function App() {
       <MainWindow SearchedRecipe = {SearchedRecipe}
                   Recipe = {function(title, desc, ingredients, pub){
                     Recipe(title, desc, ingredients, pub)
-              }}></MainWindow>
+                  }}
+                  LoadAll={function(){
+                    LoadAll()
+                  }}
+                  ListOfRecipes = {AllRecipe}
+                  Search = {function(title){
+                    Search(title)
+                  }}></MainWindow>
     </div>
   );
 }
