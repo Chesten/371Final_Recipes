@@ -7,14 +7,15 @@ function Sidebar(prop){
     //this is a handy trick for creating lists, just use array
     var list = []
     var i=0
- 
-    //populate array with <li> elements for each item in data
-    while(i<data.length){
-        list.push(<li key = {data[i].UID}>
-            {data[i].name} UID: {data[i].UID}
-        </li>)
-        i++
+    for(i=0; i<prop.ListOfRecipes.length; i++){
+        list.push(<li><button id={prop.ListOfRecipes[i]}
+                name="Search" onClick={function(e){
+                    e.preventDefault()
+                    prop.Search(e.target.id)
+                }}>{prop.ListOfRecipes[i]}</button></li>
+        )
     }
+    
 
     return(
         <nav id="SideBar">
@@ -26,10 +27,14 @@ function Sidebar(prop){
                 <input type = "text" name="SearchTerm" placeholder="Search Recipe"></input>
                 <input type = "submit"></input>
             </form>
-            <ol>
+            <button id = "loadAll" name="LoadAll" onClick={function(e){
+                e.preventDefault()
+                prop.LoadAll()
+            }}>LoadAll</button>
+            <ul>
                 {/*then just call it in the ol element*/}
                 {list}
-            </ol>
+            </ul>
         </nav>
     )
 }

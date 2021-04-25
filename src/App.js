@@ -9,11 +9,6 @@ function App() {
 
   //this is where all DB "functions" and things will go, these will depend on
     //states, 
-
-
-
-
-  var temp = [{name:"john", UID:"123"}, {name:"bill", UID:"234"}, {name:"phil", UID:"098", weird:"something new"}]
   const [UserName, setUserName] = useState('')
   const [SearchedRecipe, setRecipe] = useState(Object)
   const [AllRecipe, setAllRecipe] = useState(Array)
@@ -142,22 +137,20 @@ function App() {
              SignUp = {function(){
                 SighUp()
              }}></Header>
-     <Sidebar data={temp}
-              Search = {function(term){
+     <Sidebar Search = {function(term){
                 console.log(term)
                 Search(term)
-              }}></Sidebar>
+              }}                  
+              LoadAll={function(){
+                LoadAll()
+              }}
+              ListOfRecipes = {AllRecipe}
+      ></Sidebar>
       <MainWindow SearchedRecipe = {SearchedRecipe}
                   Recipe = {function(title, desc, ingredients, pub){
                     Recipe(title, desc, ingredients, pub)
                   }}
-                  LoadAll={function(){
-                    LoadAll()
-                  }}
-                  ListOfRecipes = {AllRecipe}
-                  Search = {function(title){
-                    Search(title)
-                  }}></MainWindow>
+      ></MainWindow>
     </div>
   );
 }
