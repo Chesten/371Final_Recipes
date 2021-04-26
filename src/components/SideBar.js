@@ -3,12 +3,11 @@ function Sidebar(prop){
         //prop handling 
         //call prop.<variable> and story it if you want
 
-    var data = prop.data;
     //this is a handy trick for creating lists, just use array
     var list = []
     var i=0
     for(i=0; i<prop.ListOfRecipes.length; i++){
-        list.push(<li><button id={prop.ListOfRecipes[i]}
+        list.push(<li key={i}><button id={prop.ListOfRecipes[i]}
                 name="Search" onClick={function(e){
                     e.preventDefault()
                     prop.Search(e.target.id)
